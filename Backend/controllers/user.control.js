@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken")
 
 const registerUser = async (req,res)=>{
     const {username, password,email} = req.body
-    const existingUser =await userModel.findOne({email, username})
+    const existingUser =await userModel.findOne({email})
     if(existingUser){
         res.send("User already exist")
     } else {
@@ -18,9 +18,9 @@ const registerUser = async (req,res)=>{
             })
             
     
-            const token = jwt.sign({email:user.email,id:user._id},"222",{expiresIn:"1h"})
-            res.cookie("token",token)
-            res.send(user)
+            const token =  jwt.sign({email:user.email,id:user._id},"222",{expiresIn:"1h"})
+            await res.cookie("token",token)
+              res.json(user)
         })
         
 
