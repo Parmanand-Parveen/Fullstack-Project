@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken")
 
 const registerUser = async (req,res)=>{
     const {username, password,email} = req.body
-    const existingUser =await userModel.findOne({email})
+    const existingUser =await userModel.findOne({email, username})
     if(existingUser){
         res.send("User already exist")
     } else {
@@ -16,6 +16,7 @@ const registerUser = async (req,res)=>{
                 password:hashedPassword,
                 email
             })
+            
     
             const token = jwt.sign({email:user.email,id:user._id},"222",{expiresIn:"1h"})
             res.cookie("token",token)
@@ -26,6 +27,26 @@ const registerUser = async (req,res)=>{
     }
 }
 
+const loginUser = async (req,res)=>{
+    const {email,password} = req.body
+    const user = await userModel.findOne({email})
+    console.log(user)
+    if(!user){
+        res.send("User does not exist")
+    } else {
+        const match = bcrypt.compare(password,user.password,(err,match)=>{
+            if(err){
+                res.send(err)
+            }else {
+                const token = jwt.sign({email:user.email,id:user._id},"222",{expiresIn:"1h"})
+                res.cookie("token",token,).json(user)
+            
+            }
+        })
+    }
+}
+
 module.exports =  {
+    loginUser,
     registerUser
 }
