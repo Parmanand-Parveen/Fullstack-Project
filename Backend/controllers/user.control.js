@@ -35,7 +35,8 @@ const loginUser = async (req,res)=>{
         res.send("User does not exist")
     } else {
         const match = bcrypt.compare(password,user.password,(err,match)=>{
-            if(err){
+            if(!match){
+                res.status(400) 
                 res.send(err)
             }else {
                 const token = jwt.sign({email:user.email,id:user._id},"222",{expiresIn:"1h"})
