@@ -1,17 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './components/ui/button'
+import { Route, Routes } from "react-router-dom";
+import Authlayout from "./components/auth/layout";
+import Login from "./pages/common/Login";
+import SignUp from "./pages/common/SignUp";
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
-  <>
-     <Button>Hello</Button>
-  </>
-  )
+    <div  className="w-full" >
+      <Routes>
+        <Route path="/auth" element={<Authlayout/>}>
+            <Route path="login" element={<Login/>}/>
+            <Route path="register" element={<SignUp/>}/>
+        </Route>
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
