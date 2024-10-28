@@ -3,9 +3,19 @@ const productModel = require("../../models/product.model");
 const userModel = require("../../models/user.model");
 
 const getCart = async (req, res) => {
+  console.log(req.body)
   const {userId} = req.body;
   const cart = await cartModel.findOne({ user: userId }).populate("items.product");
-  res.status(200).json({ success: true, cart });
+  if (!cart) {
+    return res.status(404).json({
+      success: false,
+      message: "Cart not found",
+    });
+  }
+  res.status(200).json({
+    success: true,
+    cart,
+  });
 };
 
 const addToCart = async (req, res) => {
