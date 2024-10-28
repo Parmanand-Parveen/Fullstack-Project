@@ -16,13 +16,19 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  saleprice:{
+    type:Number,
+    default:0
+  },
   category: {
     type: String,
     required: true,
   },
-  stock: {
+  brand:{
+    type:String
+  },
+  quantity: {
     type: Number,
-    required: true,
   },
   image: {
     type: String,
@@ -36,5 +42,5 @@ const productSchema = new Schema({
   timestamps: true,
 });
 
-const Product = mongoose.model('Product', productSchema);
-module.exports = Product;
+module.exports= mongoose.model('Product', productSchema);
+
