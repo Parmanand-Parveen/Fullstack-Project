@@ -3,7 +3,6 @@ const productModel = require("../../models/product.model");
 const userModel = require("../../models/user.model");
 
 const getCart = async (req, res) => {
-  console.log(req.params);
 try {
   const userId = req.params.id
  const cart = await cartModel.findOne({ user : userId }).populate("items.product");
@@ -50,7 +49,7 @@ const addToCart = async (req, res) => {
 
       if (existingItemIndex >= 0) {
         // Product already exists in the cart, update the quantity
-        if(product.quantity < quantity){
+        if(product.quantity < existingItemIndex.quantity){
           return res.status(400).json({
             success: false,
             message: "Product quantity not available",
@@ -91,7 +90,9 @@ const removeFromCart = async (req, res) => {
       { new: true }
     );
     res.status(200).json({ success: true, message: "Product removed from cart", cart });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 
