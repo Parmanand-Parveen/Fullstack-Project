@@ -12,7 +12,8 @@ function Imageupload({uploadImg, setUploadImg}) {
     <div >
        <div className='flex justify-center items-center border-2 border-dashed p-5'>
        {uploadImg ? (
-         <div className='flex items-center gap-3'>
+         <div className='flex flex-col items-center gap-3'>
+         <img src={URL.createObjectURL(uploadImg)} alt="" className=" " />
          {uploadImg.name}
            <button
              className="bg-white px-3 py-2 rounded-md flex"
