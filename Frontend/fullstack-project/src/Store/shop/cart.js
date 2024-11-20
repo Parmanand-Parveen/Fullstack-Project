@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export const getCart = createAsyncThunk("/shop/getcart", async (id) => {
-  console.log(id)
   try {
     const cartItems = await apiHandler("Get","/api/v1/shop/getcart/"+id);
     console.log(cartItems);
