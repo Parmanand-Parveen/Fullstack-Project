@@ -33,25 +33,39 @@ const registerUser = async (req,res)=>{
     }
 }
 
-const loginUser = async (req,res)=>{
-    const {email,password} = req.body
-    const user = await userModel.findOne({email})
-    if(!user){
-        res.send("User does not exist")
-    } else {
-        const match = bcrypt.compare(password,user.password,(err,match)=>{
-            if(!match){
-                res.status(400) 
-                res.send("Wrong password")
-            }else {
-                const token = jwt.sign({email:user.email,id:user._id},process.env.JWT_SECRET_KEY,{expiresIn:"1h"})
-                res.cookie("token",token,)-
-                res.json({success:true,user:user})
-            
-            }
-        })
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find user by email
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User does not exist" });
+        }
+
+        // Compare provided password with stored password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch == false) {
+            return res.status(400).json({ success: false, message: "Incorrect password" });
+        }
+
+        // Generate JWT token
+        const token = jwt.sign(
+            { email: user.email, id: user._id },
+            process.env.JWT_SECRET_KEY,
+            { expiresIn: "1h" }
+        );
+
+        // Set cookie and send response
+        res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+        return res.status(200).json({ success: true, user });
+
+    } catch (error) {
+        console.error("Login Error:", error);
+        return res.status(500).json({ success: false, message: "Internal server error" });
     }
-}
+};
+
 
 const logoutUser = async(req,res)=>{
     res.cookie("token","")
