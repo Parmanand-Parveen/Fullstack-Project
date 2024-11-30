@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/theme/mode-toggle";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,7 +66,7 @@ function Home() {
   };
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <header className="flex w-full justify-between items-center px-5 py-3 border-b sticky border-zinc-700">
         <div
           className="flex items-center gap-2 text-2xl font-bold"
@@ -74,19 +75,20 @@ function Home() {
           <HomeIcon />
           E-Commerce
         </div>
-        <div className="flex items-center gap-5 ">
+        <div className="flex items-center gap-5 dark:text-white ">
           {homeheader.map((item) => (
             <NavLink  
             key={item.id}
             to={item.path}
             
-              className="text-black font-bold hover:text-black"
+              className="text-black font-bold hover:text-black dark:text-white"
             >
               {item.name}
             </NavLink>
           ))}
         </div>
         <div className="flex items-center gap-2">
+        <ModeToggle/>
           <div className="relative">
             <ShoppingBasket
               onClick={() => {
