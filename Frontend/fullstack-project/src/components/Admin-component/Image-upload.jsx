@@ -2,7 +2,6 @@ import { Label } from '@radix-ui/react-label'
 import React, { useRef, useState } from 'react'
 import { Input } from '../ui/input'
 import { UploadCloudIcon, XIcon } from 'lucide-react'
-import { Button } from '../ui/button'
 
 function Imageupload({uploadImg, setUploadImg}) {
   
@@ -13,13 +12,13 @@ function Imageupload({uploadImg, setUploadImg}) {
        <div className='flex justify-center items-center border-2 border-dashed p-5'>
        {uploadImg ? (
          <div className='flex flex-col items-center gap-3'>
-         <img src={URL.createObjectURL(uploadImg)} alt="" className=" " />
+         <img src={URL.createObjectURL(uploadImg)} alt="" className="w-24 h-24 object-cover rounded-md " />
          {uploadImg.name}
            <button
-             className="bg-white px-3 py-2 rounded-md flex"
+             className=" px-3 py-2 rounded-md flex bg-red-500"
              onClick={() => setUploadImg(null)}
            >
-             <XIcon/>
+             <XIcon className='text-white bg-red-500'/>
            </button>
          </div>
 
