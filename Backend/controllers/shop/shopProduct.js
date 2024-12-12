@@ -2,10 +2,10 @@ const productModel = require("../../models/product.model");
 
 const fetchAllShoppingProduct = async (req, res) => {
   const { someparams } = req.query;
-
+ 
   let filter = {};
   let sortOption = {}; // To store sorting options
-
+  
   if (someparams) {
     filter = {
       category: [],
@@ -21,7 +21,18 @@ const fetchAllShoppingProduct = async (req, res) => {
       } else if (key === "sort") {
         // Assuming the sort value could be something like "price:asc" or "price:desc"
         const [sortField, sortOrder] = value.split("=");
-        sortOption[sortField] = sortOrder === "asc" ? 1 : -1;
+     if(sortField == "price%3Adsc"){
+       sortOption = {price: -1}
+      }else if(sortField == "price%3Aasc"){
+        sortOption = { price: 1}
+      }else if(sortField == "A+to+Z"){
+        sortOption = { name: 1 }
+      }else if(sortField == "Z+to+A"){
+        sortOption = { name: -1 }
+      }
+
+    
+        // sortOption[sortField] = sortOrder === "asc" ? 1 : -1;
       }
     });
 
@@ -42,6 +53,7 @@ const fetchAllShoppingProduct = async (req, res) => {
         query.$or.push({ brand: { $in: filter.brand } });
       }
     }
+    console.log(sortOption)
 
     // Fetch products with optional sorting
     const products = await productModel.find(query).sort(sortOption);
