@@ -4,9 +4,9 @@ const userModel = require("../../models/user.model")
 
 
 const createAddress = async(req,res)=>{
-    const {userId,address,city,state,country,pincode,phone} = req.body
+    const {name,userId,address,city,state,country,pincode,phone} = req.body
      try {
-        const createdAddress = await addressModel.create({userId,address,city,state,country,pincode,phone})
+        const createdAddress = await addressModel.create({name,userId,address,city,state,country,pincode,phone})
         res.json({success:true,message:"Address created successfully",createdAddress}).status(202)
      } catch (error) {
         if(error){
@@ -32,9 +32,9 @@ const deleteAddress = async(req,res)=>{
 
 const updateAddress = async(req,res)=>{
     const {id} = req.params
-    const {address,city,state,country,pincode,phone} = req.body
+    const {name,address,city,state,country,pincode,phone} = req.body
     try {
-        const updatedAddress = await addressModel.findByIdAndUpdate(id,{address,city,state,country,pincode,phone},{new:true})
+        const updatedAddress = await addressModel.findByIdAndUpdate(id,{name,address,city,state,country,pincode,phone},{new:true})
         res.json({success:true,message:"Address updated successfully",updatedAddress}).status(202)
     } catch (error) {
         if(error){
