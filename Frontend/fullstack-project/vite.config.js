@@ -6,9 +6,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     proxy: {
-      "/api": {
+      "/api/v1": {
         target: "https://fullstack-project-l50q.onrender.com",
-        changeOrigin: true,
+
       },
     },
   plugins: [react()],
