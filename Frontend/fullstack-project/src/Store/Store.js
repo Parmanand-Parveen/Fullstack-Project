@@ -3,6 +3,8 @@ import authReducer from "./auth-slice";
 import productReducer from "./admin/product"
 import shopReducer from "./shop/shopProduct"
 import cartReducer from "./shop/cart"
+import addressReducers from "./shop/addressSlice"
+import featureImgReducer from "./admin/featureImg"
 
 
 const store = configureStore({
@@ -10,7 +12,9 @@ const store = configureStore({
         auth: authReducer,
         product: productReducer,
         shopingProduct :shopReducer,
-        userCart:cartReducer
+        userCart:cartReducer,
+        featureImg:featureImgReducer,
+        address:addressReducers
     }
 })
 

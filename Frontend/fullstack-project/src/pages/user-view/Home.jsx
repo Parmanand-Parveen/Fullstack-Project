@@ -15,6 +15,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useToast } from "@/hooks/use-toast";
+import { fetchAllAddress } from "@/Store/shop/addressSlice";
 import {
   addToCart,
   clearCart,
@@ -75,7 +76,7 @@ function Home() {
           <HomeIcon />
           E-Commerce
         </div>
-        <div className="flex items-center gap-5 dark:text-white ">
+        <div className="lg:flex hidden items-center gap-5 dark:text-white  ">
           {homeheader.map((item) => (
             <NavLink  
             key={item.id}
@@ -97,7 +98,7 @@ function Home() {
               }}
             />
             <Sheet open={cartOpen} onOpenChange={setCartopen}>
-              <SheetContent side="right" className="overflow-auto">
+              <SheetContent side="right" className="overflow-y-auto">
                 <SheetHeader className="text-2xl font-bold">Cart</SheetHeader>
                 <h1
                   className="text-lg text-right underline cursor-pointer text-gray-500"
@@ -111,7 +112,7 @@ function Home() {
                   <div className="">
                     <div
                       key={item?._id}
-                      className="flex h-24 overflow-hidden relative mt-3 p-2 justify-between items-center shadow-md "
+                      className=" lg:flex lg:h-24 lg:overflow-hidden  relative mt-3 p-2 lg:justify-between lg:items-center shadow-md "
                     >
                       <Trash
                         className="absolute right-0 top-0 bg-red-500 p-1 rounded-full text-white h-5 w-5"
@@ -127,7 +128,7 @@ function Home() {
                         }}
                       />
                       <img
-                        className="w-24 object-cover"
+                        className=" w-full lg:w-24 object-cover"
                         src={item?.product?.image}
                       />
                       <div>
@@ -136,8 +137,8 @@ function Home() {
                         </p>
                         <p className="text-xs">
                           ₹
-                          {`${item?.product?.price}x${item?.quantity}=₹${
-                            item?.product?.price * item?.quantity
+                          {`${item?.product?.saleprice>0?item?.product?.saleprice: item?.product?.price }x${item?.quantity}=₹${
+                           ( item?.product?.saleprice > 0 ? item?.product?.saleprice : item?.product?.price ) * item?.quantity
                           }`}
                         </p>
                       </div>
@@ -190,7 +191,7 @@ function Home() {
                     ₹
                     {cartItem?.cartItems?.reduce(
                       (acc, item) =>
-                        acc + item?.product?.price * item?.quantity,
+                        acc + ( item?.product?.saleprice > 0 ? item?.product?.saleprice : item?.product?.price )* item?.quantity,
                       0
                     )}{" "}
                   </p>
@@ -213,7 +214,7 @@ function Home() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar>
-                <AvatarFallback className="bg-black text-white">
+                <AvatarFallback className="bg-black dark:bg-white dark:text-black text-white text-xl">
                   {user.username[0].toUpperCase()}
                 </AvatarFallback>
               </Avatar>
@@ -224,7 +225,7 @@ function Home() {
               <DropdownMenuItem className="flex gap-2 ">
                 <NavLink
                   to={"/home/useraccount"}
-                  className="text-black hover:text-black flex gap-2 items-center"
+                  className="text-black hover:text-black flex gap-2 items-center dark:text-white"
                 >
                   <UserRoundCheckIcon /> Profile
                 </NavLink>
@@ -243,7 +244,11 @@ function Home() {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex gap-2 "
-                onClick={() => navigate("/home/address")}
+                onClick={() => {
+                  dispatch(fetchAllAddress(user._id))
+                  navigate("/home/address")
+                  }
+                }
               >
                 <EyeIcon /> Address
               </DropdownMenuItem>

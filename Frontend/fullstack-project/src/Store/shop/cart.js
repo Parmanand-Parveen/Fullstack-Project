@@ -1,6 +1,5 @@
 import apiHandler from "@/utils/axios/apiHandler";
-import { createAsyncThunk, createSlice, isRejected } from "@reduxjs/toolkit";
-import { act } from "react";
+import { createAsyncThunk, createSlice, } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
@@ -11,8 +10,6 @@ const initialState = {
 export const getCart = createAsyncThunk("/shop/getcart", async (id) => {
   try {
     const cartItems = await apiHandler("Get","/api/v1/shop/getcart/"+id);
-    console.log(cartItems);
-    console.log(cartItems.data.cart.items);
     return cartItems.data.cart.items;
   } catch (error) {
     console.log(error);
@@ -41,7 +38,7 @@ export const removeCartItem = createAsyncThunk("/shop/deletecart/item",async(dat
 export const addToCart = createAsyncThunk(
   "/shop/addtocart",
   async (formData) => {
-    console.log(formData);
+    
     try {
       const product = await apiHandler(
         "POST",
@@ -49,7 +46,9 @@ export const addToCart = createAsyncThunk(
         formData
       );
       return product.data;
-    } catch (error) {}
+    } catch (error) {
+     console.log(error)
+    }
   }
 );
 

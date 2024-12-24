@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../ui/button";
-import { deleteProduct } from "@/Store/admin/product";
+import { deleteProduct, readProduct } from "@/Store/admin/product";
 import { Sheet } from "lucide-react";
 import { SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 function ProductTile({ products }) {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const {toast} = useToast()  
 
   const initialState = {
     name: "",
@@ -32,8 +34,8 @@ const handleProduct = (id) => {
 }
 
   return (
-    <div>
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-5 p-5">
+    <div >
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-5 p-5  h-screen overflow-y-scroll">
         {products.map((product) => (
           <div className="bg-gray-700 p-3" key={product._id}>
             <img
@@ -59,8 +61,14 @@ const handleProduct = (id) => {
               <Button
                 className="bg-red-500 hover:bg-red-800 border-none"
                 onClick={() =>
-                  dispatch(deleteProduct(product._id)).then(() => {
-                    window.location.reload();
+                  dispatch(deleteProduct(product._id)).then((res) => {
+                    console.log(res,"Delete product response")
+                    dispatch(readProduct())
+                    toast({
+                      variant: "destructive",
+                      title: "Product Delete",
+                      description: `${res?.payload?.product?.name} deleted successfully `,
+                    });
                   })
                 }
               >

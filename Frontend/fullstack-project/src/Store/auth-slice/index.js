@@ -27,7 +27,6 @@ export const loginhandeler  = createAsyncThunk("/auth/login",async(formdata)=>{
 
     try {
         const response = await apiHandler("POST","/api/v1/login",formdata)
-
         return response.data
     } catch (error) {
         console.log(error)

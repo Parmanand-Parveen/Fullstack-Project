@@ -1,5 +1,6 @@
 import apiHandler from "@/utils/axios/apiHandler";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { serviceworker } from "globals";
 
 const initialState= {
     shopProduct: [],
@@ -9,12 +10,13 @@ const initialState= {
 export const fetchAllShopProduct = createAsyncThunk(
     "/shop/fetchAllShopProduct",
     async (searchParams) => {
+      console.log(searchParams)
      const formData = {
       some: "data",
      };
       try {
         const getShopProduct = await apiHandler("GET", `/api/v1/shop/getproduct`,{},{someheader:"data"},{someparams:searchParams});
-        console.log(getShopProduct.data.products);  
+        
         return  getShopProduct.data.products;
       } catch (error) {
         console.log(error);

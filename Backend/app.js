@@ -4,6 +4,7 @@ const productRouter = require("./routes/admin/product.routes")
 const shopProductRouter = require("./routes/shop/product.routes")
 const cartRoute = require("./routes/shop/cart.routes")
 const featuredimgRoute = require("./routes/admin/featureImage.routes")
+const addressRouter = require("./routes/shop/address.routes")
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser")
 const dotenv= require("dotenv").config()
@@ -46,6 +47,7 @@ app.use("/api/v1",productRouter)
 app.use("/api/v1",shopProductRouter)
 app.use("/api/v1",cartRoute)
 app.use("/api/v1",featuredimgRoute)
+app.use("/api/v1",addressRouter)
 
 
 

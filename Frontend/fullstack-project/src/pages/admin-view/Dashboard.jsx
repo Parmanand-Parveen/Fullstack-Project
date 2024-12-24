@@ -94,20 +94,24 @@ function Admindashboard() {
           Loading
         </div>
       ) : (
-        <Imageupload
-          uploadImg={featureuploadImg}
-          setUploadImg={setFeatureuploadImg}
-          value={featureuploadedImageUrl}
-        />
-      )}
-      <Button onClick={featureUploadImg}>Upload Image</Button>
+      <div>  <Imageupload
+      uploadImg={featureuploadImg}
+      setUploadImg={setFeatureuploadImg}
+      value={featureuploadedImageUrl}
+    />
+    </div>
+  )}
+  <Button className="block mx-auto" onClick={featureUploadImg}  disabled={featureImgLoading}>Upload Image</Button>
+
+      
+
       {getAllfeatureImg == null ? (
         <div className="w-full h-11 flex items-center justify-center ">
           <Loader2 className="w-6 h-6 animate-spin" />
           Loading
         </div>
       ) : (
-        <div className="w-full h-11 flex gap-4 items-center justify-center ">
+        <div className="w-full h-11 flex flex-wrap gap-4 items-center mt-14 justify-center ">
           {getAllfeatureImg.map((item) => (
             <div
               key={item._id}
@@ -115,6 +119,7 @@ function Admindashboard() {
             >
               <img src={item.img} alt="" className=" rounded-md  h-28  w-60" />
               <Trash
+              className="bg-red-700 p-1 rounded-full text-white"
                 cursor="pointer"
                 onClick={() => deleteFeatureImg(item._id)}
               />

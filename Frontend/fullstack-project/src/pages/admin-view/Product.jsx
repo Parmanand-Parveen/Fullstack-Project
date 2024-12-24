@@ -124,7 +124,7 @@ function Adminproduct() {
           Product
         </div>
         <Sheet className="overflow-auto">
-          <SheetTrigger className="text-white">Add Product</SheetTrigger>
+          <SheetTrigger className="text-white dark:border-white">Add Product</SheetTrigger>
           <SheetContent side="right" className="overflow-auto">
             <SheetTitle>Add New Product</SheetTitle>
             <form className="flex flex-col mt-3 gap-2" onSubmit={handleProduct}>
@@ -197,7 +197,7 @@ function Adminproduct() {
                   setProductData({ ...productData, category: e })
                 }
               >
-                <SelectTrigger className="bg-white">
+                <SelectTrigger className="bg-white dark:bg-zinc-800">
                   <SelectValue placeholder="Select a catagory" />
                 </SelectTrigger>
                 <SelectContent>
@@ -218,13 +218,13 @@ function Adminproduct() {
                     setProductData({ ...productData, brand: e })
                   }
                 >
-                  <SelectTrigger className="bg-white">
+                  <SelectTrigger className="bg-white dark:bg-zinc-800">
                     <SelectValue placeholder="Select a brand" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Catagory</SelectLabel>
-                      <SelectItem value="addeidas">Addidas</SelectItem>
+                      <SelectItem value="addidas">Addidas</SelectItem>
                       <SelectItem value="nike">Nike</SelectItem>
                       <SelectItem value="h&M">H&M</SelectItem>
                       <SelectItem value="zara">zara</SelectItem>
@@ -239,7 +239,7 @@ function Adminproduct() {
           </SheetContent>
         </Sheet>
       </header>
-      <ProductTile products={products}/>
+      <ProductTile  products={products}/>
     </div>
   );
 }
