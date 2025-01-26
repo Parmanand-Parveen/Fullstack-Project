@@ -40,7 +40,7 @@ const fetchAllShoppingProduct = async (req, res) => {
     if (filter.category.length === 0) delete filter.category;
     if (filter.brand.length === 0) delete filter.brand;
   }
-  console.log()
+ 
   try {
     // Create query based on filter, if no filter is applied, it will return all products
     const query = {};
@@ -53,7 +53,7 @@ const fetchAllShoppingProduct = async (req, res) => {
         query.$or.push({ brand: { $in: filter.brand } });
       }
     }
-    console.log(sortOption)
+  
 
     // Fetch products with optional sorting
     const products = await productModel.find(query).sort(sortOption);

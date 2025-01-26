@@ -75,7 +75,7 @@ const logoutUser = async(req,res)=>{
 
 const checkAuth = async(req,res,next)=>{
     const token = req.cookies.token
-    console.log(token)
+
     if(!token){
         res.status(400).json({success:false,message:"User not logged in"})
     }else{
