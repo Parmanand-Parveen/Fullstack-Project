@@ -17,7 +17,7 @@ const app = express()
 
   app.use(
     cors({
-      origin: "https://e-commerce-sigma-dun.vercel.app/",
+      origin: "https://e-commerce-sigma-dun.vercel.app",
       methods: ["GET", "POST", "DELETE", "PUT"],
       allowedHeaders: [
         "Content-Type",
