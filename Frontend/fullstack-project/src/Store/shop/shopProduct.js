@@ -1,4 +1,4 @@
-import apiHandler from "@/utils/axios/apiHandler";
+import apiHandler from "../../utils/axios/apiHandler";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { serviceworker } from "globals";
 
@@ -10,7 +10,7 @@ const initialState= {
 export const fetchAllShopProduct = createAsyncThunk(
     "/shop/fetchAllShopProduct",
     async (searchParams) => {
-      console.log(searchParams)
+    
      const formData = {
       some: "data",
      };

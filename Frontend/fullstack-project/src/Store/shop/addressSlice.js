@@ -1,4 +1,4 @@
-import apiHandler from "@/utils/axios/apiHandler"
+import apiHandler from "../../utils/axios/apiHandler"
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 
 
@@ -9,7 +9,7 @@ export const addAddress = createAsyncThunk("/shop/addAddress",
         
        try {
         const result = await apiHandler("POST","/api/v1/shop/addaddress",formdata)
-         console.log(result)
+        
         return result.data
        } catch (error) {
         
@@ -54,7 +54,7 @@ export const fetchAllAddress = createAsyncThunk("/shop/getaddress",
         try {
             const result =await apiHandler("GET",`/api/v1/shop/getaddress/${id}`)
 
-            console.log(result.data)
+            
             return result.data
         } catch (error) {
             

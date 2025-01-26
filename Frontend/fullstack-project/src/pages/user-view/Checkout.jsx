@@ -1,7 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
-import { fetchAllAddress } from '@/Store/shop/addressSlice';
+import { Button } from '../../components/ui/button';
+import { Separator } from '../../components/ui/separator';
+import { fetchAllAddress } from '../../Store/shop/addressSlice';
 import React, { useEffect } from 'react';
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';

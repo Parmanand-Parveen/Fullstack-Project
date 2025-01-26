@@ -1,4 +1,4 @@
-import apiHandler from "@/utils/axios/apiHandler"
+import apiHandler from "../../utils/axios/apiHandler"
 import  {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import axios from "axios"
 import { useState } from "react"

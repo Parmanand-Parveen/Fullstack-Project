@@ -1,4 +1,4 @@
-import apiHandler from "@/utils/axios/apiHandler";
+import apiHandler from "../../utils/axios/apiHandler";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -15,7 +15,7 @@ export const createProduct = createAsyncThunk(
         "/api/v1//create/product",
         formData
       );
-      console.log(product);
+    
       return product.data;
     } catch (error) {}
   }
@@ -24,7 +24,7 @@ export const createProduct = createAsyncThunk(
 export const readProduct = createAsyncThunk("/admin/readProduct", async () => {
   try {
     const product = await apiHandler("GET", "/api/v1/read/products");
-    console.log(product);
+ 
     return product.data;
   } catch (error) {
     console.log(error);
@@ -56,7 +56,7 @@ export const editProduct = createAsyncThunk(
         `/api/v1/update/products/${id}`,
         formData
       );
-      console.log(product);
+    
       return product.data;
     } catch (error) {
       console.log(error);

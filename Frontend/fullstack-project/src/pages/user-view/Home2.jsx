@@ -26,7 +26,7 @@ const prevSlide = () => {
 };
 
 const nextSlide = () => {
-  setCurrentIndex((prevIndex) => (prevIndex === img.length - 1 ? 0 : prevIndex + 1));
+  setCurrentIndex((prevIndex) => (prevIndex === img?.length - 1 ? 0 : prevIndex + 1));
 };
 
   return (

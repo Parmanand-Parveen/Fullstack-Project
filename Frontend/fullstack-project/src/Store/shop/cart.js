@@ -1,4 +1,4 @@
-import apiHandler from "@/utils/axios/apiHandler";
+import apiHandler from "../../utils/axios/apiHandler";
 import { createAsyncThunk, createSlice, } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -26,10 +26,10 @@ export const clearCart= createAsyncThunk("/shop/clearCart",async(userId)=>{
 })
 
 export const removeCartItem = createAsyncThunk("/shop/deletecart/item",async(data)=>{
-    console.log(data)
+  
   try {
      const deleteCartItem = apiHandler("DELETE","/api/v1/shop/deletecart/item",data)  
-     console.log(deleteCartItem)
+    
   } catch (error) {
     
   }

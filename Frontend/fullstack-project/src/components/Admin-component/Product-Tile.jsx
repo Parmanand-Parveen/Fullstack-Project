@@ -29,7 +29,7 @@ function ProductTile({ products }) {
   const [productData, setProductData] = useState  (initialState);
 
 const handleProduct = (id) => {
-  {console.log(id)}
+ 
   <Link to={`/admin/product/${id}`}/>
 }
 
@@ -62,7 +62,7 @@ const handleProduct = (id) => {
                 className="bg-red-500 hover:bg-red-800 border-none"
                 onClick={() =>
                   dispatch(deleteProduct(product._id)).then((res) => {
-                    console.log(res,"Delete product response")
+                   
                     dispatch(readProduct())
                     toast({
                       variant: "destructive",

@@ -23,13 +23,13 @@ function Edit() {
     image: "",
   };
   const [editForm, setEditForm] = useState(initialState);
-  console.log(editForm)
+ 
   const location = useLocation();
 
   let s = location.pathname.split("/").pop();
   const { products } = useSelector((state) => state.product);
   const product = products.find((product) => product._id === s);
-  console.log(product);
+ 
   
   useEffect(() => {
     dispatch(readProduct());

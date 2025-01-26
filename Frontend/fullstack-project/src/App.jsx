@@ -22,8 +22,6 @@ import Edit from "./pages/admin-view/Edit";
 import { getCart } from "./Store/shop/cart";
 import Checkout from "./pages/user-view/Checkout";
 import { fetchAllFeatureImg } from "./Store/admin/featureImg";
-
-
 function App() {
   const dispatch =useDispatch()
    
@@ -32,7 +30,6 @@ function App() {
   const user = JSON.parse(localStorage.getItem("user"));
   // const dispatch = useDispatch();
   
-
   useEffect(() => {
     if(isAuthenticated && user.isAdmin== "user"){
     dispatch(getCart(user._id))
@@ -40,8 +37,6 @@ function App() {
     dispatch(fetchAllFeatureImg())
   }, [dispatch]);
 
-  
-  
  
   
   return (
