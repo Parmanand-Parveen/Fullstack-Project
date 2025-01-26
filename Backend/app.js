@@ -26,6 +26,7 @@ const app = express()
         "Expires",
         "Pragma",
         "someheader",
+        "Access-Control-Allow-Origin"
       ],
       credentials: true,
     })
