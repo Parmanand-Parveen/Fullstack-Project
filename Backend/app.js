@@ -15,22 +15,33 @@ const  {MONGO_DB_SERVER} = process.env
 const app = express()
 
 
-  app.use(
-    cors({
-      origin: "https://e-commerce-sigma-dun.vercel.app",
-      methods: ["GET", "POST", "DELETE", "PUT"],
-      allowedHeaders: [
-        "Content-Type",
-        "Authorization",
-        "Cache-Control",
-        "Expires",
-        "Pragma",
-        "someheader",
-        "Access-Control-Allow-Origin"
-      ],
-      credentials: true,
-    })
-  );
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://e-commerce-sigma-dun.vercel.app",
+        "http://localhost:5173", // For local development
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Cache-Control",
+      "Expires",
+      "Pragma",
+      "someheader",
+      "Access-Control-Allow-Origin",
+    ],
+    credentials: true,
+  })
+);
+
   
 
 app.use(express.json({limit: "16kb"}))
